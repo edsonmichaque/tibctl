@@ -52,11 +52,6 @@ func cmdProfile(opts *Options) *Cmd {
 		cmd,
 		withOutputFlag(formatTable),
 		withQueryFlag(),
-		withSubcommand(cmdProfileList(opts)),
-		withSubcommand(cmdProfileCreate(opts)),
-		withSubcommand(cmdProfileGet(opts)),
-		withSubcommand(cmdProfileUpdate(opts)),
-		withSubcommand(cmdProfileDelete(opts)),
 		withOptions(opts),
 	)
 }
@@ -108,6 +103,17 @@ func cmdProfileUpdate(opts *Options) *Cmd {
 func cmdProfileDelete(opts *Options) *Cmd {
 	cmd := &cobra.Command{
 		Use: "delete",
+		RunE: func(cmd *cobra.Command, args []string) error {
+			return nil
+		},
+	}
+
+	return newCmd(cmd, withOptions(opts))
+}
+
+func cmdProfileSave(opts *Options) *Cmd {
+	cmd := &cobra.Command{
+		Use: "save",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			return nil
 		},

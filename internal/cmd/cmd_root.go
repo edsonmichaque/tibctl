@@ -93,9 +93,14 @@ func cmdRoot(opts *Options) *Cmd {
 
 	return newCmd(
 		cmd,
-		withSubcommand(cmdProfile(opts)),
 		withSubcommand(cmdConfig(opts)),
 		withSubcommand(cmdVersion(opts)),
+		withSubcommand(cmdProfileList(opts)),
+		withSubcommand(cmdProfileCreate(opts)),
+		withSubcommand(cmdProfileGet(opts)),
+		withSubcommand(cmdProfileUpdate(opts)),
+		withSubcommand(cmdProfileDelete(opts)),
+		withSubcommand(cmdProfileSave(opts)),
 		withGlobalFlags(),
 	)
 }
