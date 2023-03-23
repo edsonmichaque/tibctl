@@ -1,4 +1,4 @@
-module github.com/edsonmichaque/template-cli
+module github.com/edsonmichaque/tibctl
 
 go 1.19
 

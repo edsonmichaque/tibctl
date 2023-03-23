@@ -20,7 +20,7 @@ import (
 	"runtime"
 
 	"github.com/MakeNowJust/heredoc/v2"
-	"github.com/edsonmichaque/template-cli/internal/build"
+	"github.com/edsonmichaque/tibctl/internal/build"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -37,14 +37,12 @@ func cmdVersion(opts *Options) *Cmd {
 			tpl := heredoc.Doc(`
 				Template CLI version:  %v
 				Template API endpoint: %v
-				Template API version:  %v
 				OS/Arch:               %v/%v
 			`)
 
 			cmd.Printf(
 				tpl,
 				build.Version,
-				prodBaseURL,
 				"v1",
 				runtime.GOOS,
 				runtime.GOARCH,

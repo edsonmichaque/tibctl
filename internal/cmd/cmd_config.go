@@ -24,7 +24,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/edsonmichaque/template-cli/internal/config"
+	"github.com/edsonmichaque/tibctl/internal/config"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
@@ -37,14 +37,10 @@ const (
 )
 
 var (
-	prodBaseURL    = "https://api.dnsimple.com"
-	sandboxBaseURL = "https://api.sandbox.dnsimple.com"
-
 	configProps = map[string]struct{}{
-		optAccount:     {},
-		optBaseURL:     {},
-		optAccessToken: {},
-		optSandbox:     {},
+		optBaseURL: {},
+		optSecret:  {},
+		optSandbox: {},
 	}
 
 	validateConfig = map[string]func(string) (interface{}, error){
@@ -57,7 +53,7 @@ var (
 		optBaseURL: func(value string) (interface{}, error) {
 			return value, nil
 		},
-		optAccessToken: func(value string) (interface{}, error) {
+		optSecret: func(value string) (interface{}, error) {
 			return value, nil
 		},
 	}
@@ -89,7 +85,7 @@ func cmdConfig(opts *Options) *Cmd {
 
 			v := viper.New()
 			v.Set(optAccount, cfg.Account)
-			v.Set(optAccessToken, cfg.AccessToken)
+			v.Set(optSecret, cfg.Secret)
 			if cfg.BaseURL != "" {
 				v.Set(optBaseURL, cfg.BaseURL)
 			}

@@ -42,10 +42,10 @@ func NewWithValidation(validate bool) (*Config, error) {
 }
 
 type Config struct {
-	Account     string `mapstructure:"account"`
-	Sandbox     bool   `mapstructure:"sandbox"`
-	AccessToken string `mapstructure:"access-token"`
-	BaseURL     string `mapstructure:"base-url"`
+	Account string `mapstructure:"account"`
+	Sandbox bool   `mapstructure:"sandbox"`
+	Secret  string `mapstructure:"access-token"`
+	BaseURL string `mapstructure:"base-url"`
 }
 
 func (c Config) Validate() error {
@@ -53,7 +53,7 @@ func (c Config) Validate() error {
 		return errors.New("account id is required")
 	}
 
-	if c.AccessToken == "" {
+	if c.Secret == "" {
 		return errors.New("access token is required")
 	}
 

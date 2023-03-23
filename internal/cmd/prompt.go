@@ -21,7 +21,7 @@ import (
 	"fmt"
 
 	"github.com/AlecAivazis/survey/v2"
-	"github.com/edsonmichaque/template-cli/internal/config"
+	"github.com/edsonmichaque/tibctl/internal/config"
 )
 
 func runConfirm(domain string) bool {
@@ -38,14 +38,12 @@ func runConfirm(domain string) bool {
 }
 
 func promptConfig(c *config.Config) (*config.Config, string, error) {
-	baseURL := prodBaseURL
-
 	accountID, err := promptAccountID(c.Account)
 	if err != nil {
 		return nil, "", err
 	}
 
-	accessToken, err := promptAccessToken(c.AccessToken)
+	accessToken, err := promptAccessToken(c.Secret)
 	if err != nil {
 		return nil, "", err
 	}
@@ -53,17 +51,6 @@ func promptConfig(c *config.Config) (*config.Config, string, error) {
 	env, err := promptEnvironment(envProd)
 	if err != nil {
 		return nil, "", err
-	}
-
-	if env == envSandbox {
-		baseURL = sandboxBaseURL
-	}
-
-	if env == envDev {
-		baseURL, err = promptBaseURL(prodBaseURL)
-		if err != nil {
-			return nil, "", err
-		}
 	}
 
 	fileFormat, err := promptFileFormat(configFormatJSON)
@@ -81,12 +68,8 @@ func promptConfig(c *config.Config) (*config.Config, string, error) {
 	}
 
 	cfg := config.Config{
-		Account:     accountID,
-		AccessToken: accessToken,
-	}
-
-	if env == envDev {
-		cfg.BaseURL = baseURL
+		Account: accountID,
+		Secret:  accessToken,
 	}
 
 	if env == envSandbox {

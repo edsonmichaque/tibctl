@@ -33,26 +33,24 @@ var (
 )
 
 const (
-	binaryName            = "template"
+	binaryName            = "tibctl"
 	defaultProfile        = "default"
 	envDev                = "DEV"
-	envPrefix             = "TEMPLATE"
+	envPrefix             = "TIBCTL"
 	envProd               = "PROD"
 	envSandbox            = "SANDBOX"
-	envTemplateConfigFile = "TEMPLATE_CONFIG_FILE"
-	envTemplateProfile    = "TEMPLATE_PROFILE"
+	envTemplateConfigFile = "TIBCTL_CONFIG_FILE"
+	envTemplateProfile    = "TIBCTL_PROFILE"
 	envXDGConfigHome      = "XDG_CONFIG_HOME"
 	formatJSON            = "json"
 	formatTable           = "table"
 	formatText            = "text"
 	formatYAML            = "yaml"
-	optAccessToken        = "access-token"
+	optSecret             = "secret"
 	optAccount            = "account"
 	optBaseURL            = "base-url"
-	optCollaboratorID     = "collaborator-id"
 	optConfigFile         = "config-file"
 	optConfirm            = "confirm"
-	optDomain             = "domain"
 	optOutput             = "output"
 	optPage               = "page"
 	optPerPage            = "per-page"
@@ -61,8 +59,8 @@ const (
 	optRecordID           = "record-id"
 	optSandbox            = "sandbox"
 	optionFromFile        = "from-file"
-	pathConfigFile        = "/etc/template"
-	pathTemplate          = "template"
+	pathConfigFile        = "/etc/tibctl"
+	pathTemplate          = "tibctl"
 )
 
 func init() {
@@ -95,8 +93,7 @@ func cmdRoot(opts *Options) *Cmd {
 
 	return newCmd(
 		cmd,
-		withSubcommand(cmdFoo(opts)),
-		withSubcommand(cmdBar(opts)),
+		withSubcommand(cmdProfile(opts)),
 		withSubcommand(cmdConfig(opts)),
 		withSubcommand(cmdVersion(opts)),
 		withGlobalFlags(),
